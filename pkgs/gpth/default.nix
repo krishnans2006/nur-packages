@@ -22,7 +22,8 @@ buildDartApplication rec {
     "bin/gpth" = "bin/gpth.dart";
   };
 
-  autoPubspecLock = src + "/pubspec.lock";
+  # Vendored to avoid IFD from autoPubspecLock (breaks NUR CI restrict-eval)
+  pubspecLock = lib.importJSON ./pubspec.lock.json;
 
   meta = {
     description = "Tool to organize the Google Photos Takeout archive into one chronological folder";
